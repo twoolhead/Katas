@@ -6,7 +6,7 @@
 	<artifactId>FizzBuzzKata</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	
+
 	<build>
 		<plugins>
 			<plugin>

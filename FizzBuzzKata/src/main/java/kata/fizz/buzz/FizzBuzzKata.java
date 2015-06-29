@@ -4,8 +4,6 @@ package kata.fizz.buzz;
  * Created by Thomas on 6/25/2015.
  */
 
-import kata.fizz.buzz.FizzBuzz;
-
 public class FizzBuzzKata {
     public FizzBuzzKata() {
     }

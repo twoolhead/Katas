@@ -4,8 +4,6 @@ package kata.fizz.buzz;
  * Created by Thomas on 6/25/2015.
  */
 
-import kata.fizz.buzz.FizzBuzz;
-import kata.fizz.buzz.FizzBuzzKata;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
