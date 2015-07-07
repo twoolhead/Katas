@@ -19,6 +19,7 @@ public class CronologicalApplicationRunnerTest {
         final String actualTime = berlinUhrTime.getTime();
 
         assertEquals(actualTime, "RYO");
+
     }
 
 }
