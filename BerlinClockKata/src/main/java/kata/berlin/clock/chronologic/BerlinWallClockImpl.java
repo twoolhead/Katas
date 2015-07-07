@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class BerlinWallClockImpl implements IChronologicalInstrument {
 
+    private static final String TIME_SUBSTEP = ":";
+
     private IChronologicalFormatter cronologicalFormatter;
     private String time;
 
@@ -22,15 +24,19 @@ public class BerlinWallClockImpl implements IChronologicalInstrument {
 
     @Override
     public ITime displayCompleteTime() {
+        final String[] decomposed = time.split(TIME_SUBSTEP);
+
+        TimeUtils.timeIsCorrectStructure(decomposed);
+
         final StringBuilder timeBuilder = new StringBuilder();
 
-        final List<Signals> hourSignals = cronologicalFormatter.formatHour(time);
+        final List<Signals> hourSignals = cronologicalFormatter.formatHour(decomposed[0]);
         bindAllFormatterSignals(timeBuilder, hourSignals);
 
-        final List<Signals> minuteSignals = cronologicalFormatter.formatMinute(time);
+        final List<Signals> minuteSignals = cronologicalFormatter.formatMinute(decomposed[1]);
         bindAllFormatterSignals(timeBuilder, minuteSignals);
 
-        final List<Signals> secondSignals = cronologicalFormatter.formatSecond(time);
+        final List<Signals> secondSignals = cronologicalFormatter.formatSecond(decomposed[2]);
         bindAllFormatterSignals(timeBuilder, secondSignals);
 
         return new TimeImpl(timeBuilder.toString());
@@ -40,7 +46,7 @@ public class BerlinWallClockImpl implements IChronologicalInstrument {
         for(Signals signal : signals) {
             timeBuilder.append(signal);
         }
-        timeBuilder.append(", ");
+        timeBuilder.append(TIME_SUBSTEP);
     }
 
     public IChronologicalFormatter getCronologicalFormatter() {
