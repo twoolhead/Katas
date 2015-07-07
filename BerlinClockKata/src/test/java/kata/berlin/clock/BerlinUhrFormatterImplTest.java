@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 
 @Test
 public class BerlinUhrFormatterImplTest {
@@ -31,6 +32,7 @@ public class BerlinUhrFormatterImplTest {
 
         final List<Signals> actualSignal = chronologicalFormatter.formatSecond(second);
 
+        assertFalse(actualSignal.isEmpty(), "Signal list should not be empty, unless there was an error.");
         assertEquals(actualSignal.size(), 1, "There should only be one Signal in here.");
         assertEquals(actualSignal, Arrays.asList(Signals.RED), "There should only be a RED Signal in here -> R.");
     }

@@ -1,17 +1,20 @@
 package kata.berlin.clock.formatter;
 
 import kata.berlin.clock.core.Signals;
+import kata.berlin.clock.core.TimeUtils;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Thomas on 7/6/2015.
  */
 public class BerlinUhrFormatterImpl implements IChronologicalFormatter {
 
-    private static final List<Signals> DEFAULT_EMPTY = Collections.emptyList();
+    private static final List<Signals> EMPTY_SIGNALS = Collections.emptyList();
+    private static final int DIVISIBLE_BY_TWO = 2;
 
     @Override
     public List<Signals> formatHour(final String hour) {
@@ -25,9 +28,11 @@ public class BerlinUhrFormatterImpl implements IChronologicalFormatter {
 
     @Override
     public List<Signals> formatSecond(final String second) {
-        if ((Integer.parseInt(second) % 2) == 0) {
-            return Arrays.asList(Signals.RED);
+        if (TimeUtils.timeIsNullOrEmpty(second)) {
+            return EMPTY_SIGNALS;
         }
-        return DEFAULT_EMPTY;
+
+        return ((Integer.parseInt(second) % DIVISIBLE_BY_TWO) == 0)
+                ? Arrays.asList(Signals.RED) : Arrays.asList(Signals.OFF);
     }
 }

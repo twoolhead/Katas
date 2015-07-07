@@ -3,6 +3,7 @@ package kata.berlin.clock.chronologic;
 import kata.berlin.clock.core.ITime;
 import kata.berlin.clock.core.Signals;
 import kata.berlin.clock.core.TimeImpl;
+import kata.berlin.clock.core.TimeUtils;
 import kata.berlin.clock.formatter.IChronologicalFormatter;
 
 import java.util.List;
