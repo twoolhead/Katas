@@ -1,18 +1,21 @@
-package kata.berlin.clock;
+package kata.berlin.clock.chronologic;
 
-import sun.misc.Signal;
+import kata.berlin.clock.core.ITime;
+import kata.berlin.clock.core.Signals;
+import kata.berlin.clock.core.TimeImpl;
+import kata.berlin.clock.formatter.IChronologicalFormatter;
 
 import java.util.List;
 
 /**
  * Created by Thomas on 7/6/2015.
  */
-public class BerlinWallClockImpl implements ICronologicalInstrument {
+public class BerlinWallClockImpl implements IChronologicalInstrument {
 
-    private ICronologicalFormatter cronologicalFormatter;
+    private IChronologicalFormatter cronologicalFormatter;
     private String time;
 
-    public BerlinWallClockImpl(String time, ICronologicalFormatter cronologicalFormatter) {
+    public BerlinWallClockImpl(String time, IChronologicalFormatter cronologicalFormatter) {
         this.time = time;
         this.cronologicalFormatter = cronologicalFormatter;
     }
@@ -40,11 +43,11 @@ public class BerlinWallClockImpl implements ICronologicalInstrument {
         timeBuilder.append(", ");
     }
 
-    public ICronologicalFormatter getCronologicalFormatter() {
+    public IChronologicalFormatter getCronologicalFormatter() {
         return cronologicalFormatter;
     }
 
-    public void setCronologicalFormatter(ICronologicalFormatter cronologicalFormatter) {
+    public void setCronologicalFormatter(IChronologicalFormatter cronologicalFormatter) {
         this.cronologicalFormatter = cronologicalFormatter;
     }
 

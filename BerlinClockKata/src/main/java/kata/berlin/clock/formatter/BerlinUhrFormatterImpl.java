@@ -1,11 +1,13 @@
-package kata.berlin.clock;
+package kata.berlin.clock.formatter;
+
+import kata.berlin.clock.core.Signals;
 
 import java.util.List;
 
 /**
  * Created by Thomas on 7/6/2015.
  */
-public class BerlinUhrFormatterImpl implements ICronologicalFormatter {
+public class BerlinUhrFormatterImpl implements IChronologicalFormatter {
 
     @Override
     public List<Signals> formatHour(String hour) {

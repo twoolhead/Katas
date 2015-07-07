@@ -1,4 +1,4 @@
-package kata.berlin.clock;
+package kata.berlin.clock.core;
 
 /**
  * Created by Thomas on 7/6/2015.

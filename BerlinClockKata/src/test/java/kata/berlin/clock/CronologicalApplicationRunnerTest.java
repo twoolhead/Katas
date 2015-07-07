@@ -1,6 +1,10 @@
 package kata.berlin.clock;
 
-import org.testng.Assert;
+import kata.berlin.clock.chronologic.BerlinWallClockImpl;
+import kata.berlin.clock.chronologic.IChronologicalInstrument;
+import kata.berlin.clock.core.ITime;
+import kata.berlin.clock.formatter.BerlinUhrFormatterImpl;
+import kata.berlin.clock.formatter.IChronologicalFormatter;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -12,8 +16,8 @@ import static org.testng.Assert.assertEquals;
 public class CronologicalApplicationRunnerTest {
 
     public void shouldReturnTimeInBerlinUhrFormat() {
-        final ICronologicalFormatter cronologicalFormatter = new BerlinUhrFormatterImpl();
-        final ICronologicalInstrument cronologicalInstrument = new BerlinWallClockImpl("", cronologicalFormatter);
+        final IChronologicalFormatter cronologicalFormatter = new BerlinUhrFormatterImpl();
+        final IChronologicalInstrument cronologicalInstrument = new BerlinWallClockImpl("", cronologicalFormatter);
 
         final ITime berlinUhrTime = cronologicalInstrument.displayCompleteTime();
         final String actualTime = berlinUhrTime.getTime();
