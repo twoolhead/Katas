@@ -17,12 +17,12 @@ public class CronologicalApplicationRunnerTest {
 
     public void shouldReturnTimeInBerlinUhrFormat() {
         final IChronologicalFormatter cronologicalFormatter = new BerlinUhrFormatterImpl();
-        final IChronologicalInstrument cronologicalInstrument = new BerlinWallClockImpl("", cronologicalFormatter);
+        final IChronologicalInstrument cronologicalInstrument = new BerlinWallClockImpl("11:53:56", cronologicalFormatter);
 
         final ITime berlinUhrTime = cronologicalInstrument.displayCompleteTime();
         final String actualTime = berlinUhrTime.getTime();
 
-        assertEquals(actualTime, "RYO");
+        assertEquals(actualTime, "R:RROO:ROOO:YYRYYRYYRYO:RRRO");
     }
 
 }
