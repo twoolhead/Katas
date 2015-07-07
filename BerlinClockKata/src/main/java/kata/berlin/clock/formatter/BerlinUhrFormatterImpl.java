@@ -23,6 +23,9 @@ public class BerlinUhrFormatterImpl implements IChronologicalFormatter {
 
     @Override
     public List<Signals> formatMinute(final String minute) {
+        if (TimeUtils.timeIsNullOrEmpty(minute)) {
+            return EMPTY_SIGNALS;
+        }
         return null;
     }
 
