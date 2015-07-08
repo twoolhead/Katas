@@ -20,7 +20,14 @@ public class TimeUtils {
     /*
         Time component is not null or not empty.
      */
-    public static boolean timeIsNullOrEmpty(final String timeComponent) {
-        return (Objects.isNull(timeComponent) || timeComponent.trim().length() == 0);
+    public static boolean timeIsNullOrEmpty(final String component) {
+        return (Objects.isNull(component) || component.trim().length() == 0);
+    }
+
+    /*
+        Time component divisible by some number.
+     */
+    public static boolean isDivisibleBy(final int two, final String component) {
+        return (Integer.parseInt(component) % two) == 0;
     }
 }

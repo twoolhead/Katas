@@ -71,4 +71,14 @@ public class BerlinUhrFormatterImplTest {
         assertEquals(actualSignal.size(), 11, "Incorrect number of Signals.");
         assertEquals(actualSignal, BerlinClockMotherResults.FIVE_MINUTES);
     }
+
+    public void shouldIndicateCorrectSignalsForTwentyMinuteInterval() {
+        final String minute = new String("20");
+
+        final List<Signals> actualSignal = chronologicalFormatter.formatMinute(minute);
+
+        assertFalse(actualSignal.isEmpty(), "Signal list should not be empty, unless there was an error.");
+        assertEquals(actualSignal.size(), 11, "Incorrect number of Signals.");
+        assertEquals(actualSignal, BerlinClockMotherResults.FIVE_MINUTES);
+    }
 }
