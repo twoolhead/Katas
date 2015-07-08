@@ -7,7 +7,6 @@ package kata.berlin.clock;
 import kata.berlin.clock.core.Signals;
 import kata.berlin.clock.formatter.BerlinUhrFormatterImpl;
 import kata.berlin.clock.formatter.IChronologicalFormatter;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -69,7 +68,7 @@ public class BerlinUhrFormatterImplTest {
 
         assertFalse(actualSignal.isEmpty(), "Signal list should not be empty, unless there was an error.");
         assertEquals(actualSignal.size(), 11, "Incorrect number of Signals.");
-        assertEquals(actualSignal, BerlinClockMotherResults.FIVE_MINUTES);
+        assertEquals(actualSignal, BerlinClockMother.FIVE_MINUTES);
     }
 
     public void shouldIndicateCorrectSignalsForTwentyMinuteInterval() {
@@ -79,6 +78,26 @@ public class BerlinUhrFormatterImplTest {
 
         assertFalse(actualSignal.isEmpty(), "Signal list should not be empty, unless there was an error.");
         assertEquals(actualSignal.size(), 11, "Incorrect number of Signals.");
-        assertEquals(actualSignal, BerlinClockMotherResults.FIVE_MINUTES);
+        assertEquals(actualSignal, BerlinClockMother.TWENTY_MINUTES);
+    }
+
+    public void shouldIndicateCorrectSignalsForTwentyFiveInterval() {
+        final String minute = new String("25");
+
+        final List<Signals> actualSignal = chronologicalFormatter.formatMinute(minute);
+
+        assertFalse(actualSignal.isEmpty(), "Signal list should not be empty, unless there was an error.");
+        assertEquals(actualSignal.size(), 11, "Incorrect number of Signals.");
+        assertEquals(actualSignal, BerlinClockMother.TWENTY_FIVE_MINUTES);
+    }
+
+    public void shouldIndicateCorrectSignalsForTwentyFourInterval() {
+        final String minute = new String("24");
+
+        final List<Signals> actualSignal = chronologicalFormatter.formatMinute(minute);
+
+        assertFalse(actualSignal.isEmpty(), "Signal list should not be empty, unless there was an error.");
+        assertEquals(actualSignal.size(), 11, "Incorrect number of Signals.");
+        assertEquals(actualSignal, BerlinClockMother.FOUR_MINUTES);
     }
 }

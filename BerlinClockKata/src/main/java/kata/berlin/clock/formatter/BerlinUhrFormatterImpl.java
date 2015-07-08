@@ -1,5 +1,6 @@
 package kata.berlin.clock.formatter;
 
+import kata.berlin.clock.core.DefaultSignals;
 import kata.berlin.clock.core.Signals;
 import kata.berlin.clock.core.TimeUtils;
 
@@ -10,34 +11,41 @@ import java.util.*;
  */
 public class BerlinUhrFormatterImpl implements IChronologicalFormatter {
 
-    private static final List<Signals> EMPTY_SIGNALS = Collections.emptyList();
-    public static final int MINUTE_CAPACITY = 11;
+    private static final List<List<Signals>> EMPTY_SIGNALS = Collections.emptyList();
     private static final int TWO = 2;
-    public static final int MINUTE_INTERVAL_VALUE = 5;
 
     @Override
-    public List<Signals> formatHour(final String hour) {
+    public List<List<Signals>> formatHour(final String hour) {
         return null;
     }
 
     @Override
-    public List<Signals> formatMinute(final String minute) {
+    public List<List<Signals>> formatMinute(final String minute) {
         if (TimeUtils.timeIsNullOrEmpty(minute)) {
             return EMPTY_SIGNALS;
         }
 
-        final List<Signals> minuteSignals = Arrays.asList(new Signals[MINUTE_CAPACITY]);
-        Collections.fill(minuteSignals, Signals.OFF);
+        final List<List<Signals>> totalMinuteSignals = new ArrayList<>();
+        final List<Signals> fiveMinuteSignals = DefaultSignals.FIVE_MINUTE.createDefaultSignal();
 
         final int minInt = Integer.parseInt(minute);
 
         int factors, remainder;
-        if((remainder = (minInt % MINUTE_INTERVAL_VALUE)) == 0) {
-            factors = (Integer.parseInt(minute) / MINUTE_INTERVAL_VALUE);
-            createMultipleSignals(minuteSignals, Signals.YELLOW, factors);
-        };
+        factors = (minInt / DefaultSignals.FIVE_MINUTE.getValue());
+        createMultipleSignals(fiveMinuteSignals, Signals.YELLOW, factors);
 
-        return minuteSignals;
+        final List<Signals> oneMinuteSignals = DefaultSignals.ONE_MINUTE.createDefaultSignal();
+        if((remainder = (minInt % DefaultSignals.FIVE_MINUTE.getValue())) != 0) {
+            factors = (remainder / DefaultSignals.ONE_MINUTE.getValue());
+            createMultipleSignals(oneMinuteSignals, Signals.YELLOW, factors);
+        }
+
+        totalMinuteSignals.add(fiveMinuteSignals);
+        if (!oneMinuteSignals.isEmpty()) {
+            totalMinuteSignals.add(oneMinuteSignals);
+        }
+
+        return totalMinuteSignals;
     }
 
     private void createMultipleSignals(List<Signals> signals, Signals signal, int repitition) {
@@ -47,7 +55,7 @@ public class BerlinUhrFormatterImpl implements IChronologicalFormatter {
     }
 
     @Override
-    public List<Signals> formatSecond(final String second) {
+    public List<List<Signals>> formatSecond(final String second) {
         if (TimeUtils.timeIsNullOrEmpty(second)) {
             return EMPTY_SIGNALS;
         }

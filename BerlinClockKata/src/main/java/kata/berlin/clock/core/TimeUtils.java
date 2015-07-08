@@ -1,5 +1,8 @@
 package kata.berlin.clock.core;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -29,5 +32,14 @@ public class TimeUtils {
      */
     public static boolean isDivisibleBy(final int two, final String component) {
         return (Integer.parseInt(component) % two) == 0;
+    }
+
+    /*
+        Factory method for default signal representations.
+    */
+    public static List<Signals> createAndFillSignalRepresentation(int size, Signals fillSignal) {
+        List<Signals> defaultSignal = Arrays.asList(new Signals[size]);
+        Collections.fill(defaultSignal, fillSignal);
+        return defaultSignal;
     }
 }
