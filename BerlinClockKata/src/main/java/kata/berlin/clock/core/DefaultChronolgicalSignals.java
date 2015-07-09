@@ -7,26 +7,26 @@ import java.util.List;
 /**
  * Created by Thomas on 7/7/2015.
  */
-public enum DefaultSignals {
-    ONE_MINUTE(1, 4, Signals.OFF), FIVE_MINUTE(5, 11, Signals.OFF);
+public enum DefaultChronolgicalSignals {
+    ONE_MINUTE(1, 4, ChronologicalSignals.OFF), FIVE_MINUTE(5, 11, ChronologicalSignals.OFF);
 
-    private Signals fill;
+    private ChronologicalSignals fill;
     private int value;
     private int size;
 
-    DefaultSignals(int value, int size, Signals fill) {
+    DefaultChronolgicalSignals(int value, int size, ChronologicalSignals fill) {
         this.value = value;
         this.size = size;
         this.fill = fill;
     }
 
-    public List<Signals> createDefaultSignal() {
-        List<Signals> defaultSignal = Arrays.asList(new Signals[this.size]);
+    public List<ChronologicalSignals> createDefaultSignal() {
+        List<ChronologicalSignals> defaultSignal = Arrays.asList(new ChronologicalSignals[this.size]);
         Collections.fill(defaultSignal, this.fill);
         return defaultSignal;
     }
 
-    public Signals getFill() {
+    public ChronologicalSignals getFill() {
         return fill;
     }
 

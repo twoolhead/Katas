@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * Created by Thomas on 7/6/2015.
  */
-public class TimeUtils {
+public class ChronologicalUtils {
     private static final int THREE = 3;
 
     /*
@@ -37,8 +37,8 @@ public class TimeUtils {
     /*
         Factory method for default signal representations.
     */
-    public static List<Signals> createAndFillSignalRepresentation(int size, Signals fillSignal) {
-        List<Signals> defaultSignal = Arrays.asList(new Signals[size]);
+    public static List<ChronologicalSignals> createAndFillSignalRepresentation(int size, ChronologicalSignals fillSignal) {
+        List<ChronologicalSignals> defaultSignal = Arrays.asList(new ChronologicalSignals[size]);
         Collections.fill(defaultSignal, fillSignal);
         return defaultSignal;
     }

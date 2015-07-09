@@ -1,8 +1,8 @@
 package kata.berlin.clock.formatter;
 
-import kata.berlin.clock.core.DefaultSignals;
-import kata.berlin.clock.core.Signals;
-import kata.berlin.clock.core.TimeUtils;
+import kata.berlin.clock.core.DefaultChronolgicalSignals;
+import kata.berlin.clock.core.ChronologicalSignals;
+import kata.berlin.clock.core.ChronologicalUtils;
 
 import java.util.*;
 
@@ -11,33 +11,32 @@ import java.util.*;
  */
 public class BerlinUhrFormatterImpl implements IChronologicalFormatter {
 
-    private static final List<List<Signals>> EMPTY_SIGNALS = Collections.emptyList();
     private static final int TWO = 2;
 
     @Override
-    public List<List<Signals>> formatHour(final String hour) {
-        return null;
+    public ChronologicalFormat formatHour(final String hour) {
+        return ChronologicalFormat.VOID_FORMAT;
     }
 
     @Override
-    public List<List<Signals>> formatMinute(final String minute) {
-        if (TimeUtils.timeIsNullOrEmpty(minute)) {
-            return EMPTY_SIGNALS;
+    public ChronologicalFormat formatMinute(final String minute) {
+        if (ChronologicalUtils.timeIsNullOrEmpty(minute)) {
+            return ChronologicalFormat.VOID_FORMAT;
         }
 
-        final List<List<Signals>> totalMinuteSignals = new ArrayList<>();
-        final List<Signals> fiveMinuteSignals = DefaultSignals.FIVE_MINUTE.createDefaultSignal();
+        final List<List<ChronologicalSignals>> totalMinuteSignals = new ArrayList<>();
+        final List<ChronologicalSignals> fiveMinuteSignals = DefaultChronolgicalSignals.FIVE_MINUTE.createDefaultSignal();
 
         final int minInt = Integer.parseInt(minute);
 
         int factors, remainder;
-        factors = (minInt / DefaultSignals.FIVE_MINUTE.getValue());
-        createMultipleSignals(fiveMinuteSignals, Signals.YELLOW, factors);
+        factors = (minInt / DefaultChronolgicalSignals.FIVE_MINUTE.getValue());
+        createMultipleSignals(fiveMinuteSignals, ChronologicalSignals.YELLOW, factors);
 
-        final List<Signals> oneMinuteSignals = DefaultSignals.ONE_MINUTE.createDefaultSignal();
-        if((remainder = (minInt % DefaultSignals.FIVE_MINUTE.getValue())) != 0) {
-            factors = (remainder / DefaultSignals.ONE_MINUTE.getValue());
-            createMultipleSignals(oneMinuteSignals, Signals.YELLOW, factors);
+        final List<ChronologicalSignals> oneMinuteSignals = DefaultChronolgicalSignals.ONE_MINUTE.createDefaultSignal();
+        if((remainder = (minInt % DefaultChronolgicalSignals.FIVE_MINUTE.getValue())) != 0) {
+            factors = (remainder / DefaultChronolgicalSignals.ONE_MINUTE.getValue());
+            createMultipleSignals(oneMinuteSignals, ChronologicalSignals.YELLOW, factors);
         }
 
         totalMinuteSignals.add(fiveMinuteSignals);
@@ -45,22 +44,22 @@ public class BerlinUhrFormatterImpl implements IChronologicalFormatter {
             totalMinuteSignals.add(oneMinuteSignals);
         }
 
-        return totalMinuteSignals;
-    }
-
-    private void createMultipleSignals(List<Signals> signals, Signals signal, int repitition) {
-        for(int sig = 0; sig < repitition; sig++) {
-            signals.set(sig, signal);
-        }
+        return ChronologicalFormat.VOID_FORMAT;
     }
 
     @Override
-    public List<List<Signals>> formatSecond(final String second) {
-        if (TimeUtils.timeIsNullOrEmpty(second)) {
-            return EMPTY_SIGNALS;
+    public ChronologicalFormat formatSecond(final String second) {
+        if (ChronologicalUtils.timeIsNullOrEmpty(second)) {
+            return ChronologicalFormat.VOID_FORMAT;
         }
 
-        return TimeUtils.isDivisibleBy(TWO, second) ? Arrays.asList(Signals.RED) : Arrays.asList(Signals.OFF);
+        return ChronologicalUtils.isDivisibleBy(TWO, second) ? new ChronologicalFormat(ChronologicalSignals.RED.getSignal()) : new ChronologicalFormat(ChronologicalSignals.OFF.getSignal());
+    }
+
+    private void createMultipleSignals(List<ChronologicalSignals> signals, ChronologicalSignals signal, int repetition) {
+        for(int sig = 0; sig < repetition; sig++) {
+            signals.set(sig, signal);
+        }
     }
 
 }
