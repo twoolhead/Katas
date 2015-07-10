@@ -19,7 +19,7 @@ public class CronologicalApplicationRunnerTest {
         final IChronologicalFormatter cronologicalFormatter = new BerlinUhrFormatterImpl();
         final IChronologicalInstrument cronologicalInstrument = new BerlinWallClockImpl("11:53:56", cronologicalFormatter);
 
-        final ITime berlinUhrTime = cronologicalInstrument.displayCompleteTime();
+        final ITime berlinUhrTime = cronologicalInstrument.displayTime();
         final String actualTime = berlinUhrTime.getTime();
 
         assertEquals(actualTime, "R:RROO:ROOO:YYRYYRYYRYO:RRRO");

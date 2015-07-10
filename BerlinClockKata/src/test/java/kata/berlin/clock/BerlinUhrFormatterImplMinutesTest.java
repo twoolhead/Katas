@@ -1,7 +1,7 @@
 package kata.berlin.clock;
 
 import kata.berlin.clock.formatter.BerlinUhrFormatterImpl;
-import kata.berlin.clock.formatter.ChronologicalFormat;
+import kata.berlin.clock.formatter.ChronologicalFormatComposite;
 import kata.berlin.clock.formatter.IChronologicalFormatter;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -24,7 +24,7 @@ public class BerlinUhrFormatterImplMinutesTest {
     public void shouldIndicateCorrectSignalsForTwentyMinuteInterval() {
         final String minute = new String("20");
 
-        final ChronologicalFormat actualFormatted = chronologicalFormatter.formatMinute(minute);
+        final ChronologicalFormatComposite actualFormatted = chronologicalFormatter.formatMinute(minute);
 
         assertEquals(actualFormatted, BerlinClockMotherObjects.TWENTY_MINUTES);
     }
@@ -32,7 +32,7 @@ public class BerlinUhrFormatterImplMinutesTest {
     public void shouldIndicateCorrectSignalsForTwentyFiveInterval() {
         final String minute = new String("25");
 
-        final ChronologicalFormat actualFormatted = chronologicalFormatter.formatMinute(minute);
+        final ChronologicalFormatComposite actualFormatted = chronologicalFormatter.formatMinute(minute);
 
         assertEquals(actualFormatted, BerlinClockMotherObjects.TWENTY_FIVE_MINUTES);
     }
@@ -40,7 +40,7 @@ public class BerlinUhrFormatterImplMinutesTest {
     public void shouldIndicateCorrectSignalsForTwentyFourInterval() {
         final String minute = new String("24");
 
-        final ChronologicalFormat actualFormatted = chronologicalFormatter.formatMinute(minute);
+        final ChronologicalFormatComposite actualFormatted = chronologicalFormatter.formatMinute(minute);
 
         assertEquals(actualFormatted, BerlinClockMotherObjects.FOUR_MINUTES);
     }
@@ -48,7 +48,7 @@ public class BerlinUhrFormatterImplMinutesTest {
     public void shouldIndicateCorrectSignalsForFiveMinuteInterval() {
         final String minute = new String("5");
 
-        final ChronologicalFormat actualFormatted = chronologicalFormatter.formatMinute(minute);
+        final ChronologicalFormatComposite actualFormatted = chronologicalFormatter.formatMinute(minute);
 
         assertEquals(actualFormatted, BerlinClockMotherObjects.FIVE_MINUTES);
     }

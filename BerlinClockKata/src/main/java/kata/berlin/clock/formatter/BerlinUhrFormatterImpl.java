@@ -14,14 +14,29 @@ public class BerlinUhrFormatterImpl implements IChronologicalFormatter {
     private static final int TWO = 2;
 
     @Override
-    public ChronologicalFormat formatHour(final String hour) {
-        return ChronologicalFormat.VOID_FORMAT;
+    public IChronologicalFormat formatTotalTime(String hours, String minutes, String seconds) {
+        final ChronologicalFormatComposite total = new ChronologicalFormatComposite();
+
+        IChronologicalFormat hour = formatHour(hours);
+        IChronologicalFormat minute = formatMinute(minutes);
+        IChronologicalFormat second = formatSecond(seconds);
+
+        total.addFormatted(hour);
+        total.addFormatted(minute);
+        total.addFormatted(second);
+
+        return total;
     }
 
     @Override
-    public ChronologicalFormat formatMinute(final String minute) {
+    public IChronologicalFormat formatHour(final String hour) {
+        return IChronologicalFormat.VOID_FORMAT;
+    }
+
+    @Override
+    public IChronologicalFormat formatMinute(final String minute) {
         if (ChronologicalUtils.timeIsNullOrEmpty(minute)) {
-            return ChronologicalFormat.VOID_FORMAT;
+            return IChronologicalFormat.VOID_FORMAT;
         }
 
         final List<List<ChronologicalSignals>> totalMinuteSignals = new ArrayList<>();
@@ -44,16 +59,18 @@ public class BerlinUhrFormatterImpl implements IChronologicalFormatter {
             totalMinuteSignals.add(oneMinuteSignals);
         }
 
-        return ChronologicalFormat.VOID_FORMAT;
+        return IChronologicalFormat.VOID_FORMAT;
     }
 
     @Override
-    public ChronologicalFormat formatSecond(final String second) {
+    public IChronologicalFormat formatSecond(final String second) {
         if (ChronologicalUtils.timeIsNullOrEmpty(second)) {
-            return ChronologicalFormat.VOID_FORMAT;
+            return IChronologicalFormat.VOID_FORMAT;
         }
 
-        return ChronologicalUtils.isDivisibleBy(TWO, second) ? new ChronologicalFormat(ChronologicalSignals.RED.getSignal()) : new ChronologicalFormat(ChronologicalSignals.OFF.getSignal());
+        return ChronologicalUtils.isDivisibleBy(TWO, second) ?
+                new ChronologicalFormatComponent(ChronologicalSignals.RED.getSignal()) :
+                new ChronologicalFormatComponent(ChronologicalSignals.OFF.getSignal());
     }
 
     private void createMultipleSignals(List<ChronologicalSignals> signals, ChronologicalSignals signal, int repetition) {
