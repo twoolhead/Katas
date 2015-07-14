@@ -4,8 +4,6 @@ import kata.berlin.clock.core.DefaultChronolgicalSignals;
 import kata.berlin.clock.core.ChronologicalSignals;
 import kata.berlin.clock.core.ChronologicalUtils;
 
-import java.util.*;
-
 /**
  * Created by Thomas on 7/6/2015.
  */
@@ -39,27 +37,27 @@ public class BerlinUhrFormatterImpl implements IChronologicalFormatter {
             return IChronologicalFormat.VOID_FORMAT;
         }
 
-        final List<List<ChronologicalSignals>> totalMinuteSignals = new ArrayList<>();
-        final List<ChronologicalSignals> fiveMinuteSignals = DefaultChronolgicalSignals.FIVE_MINUTE.createDefaultSignal();
+        final StringBuilder fiveMinuteBuilder = new StringBuilder();
+        setDefaultSignals(fiveMinuteBuilder, ChronologicalSignals.OFF, DefaultChronolgicalSignals.FIVE_MINUTE.getSize());
 
         final int minInt = Integer.parseInt(minute);
 
-        int factors, remainder;
-        factors = (minInt / DefaultChronolgicalSignals.FIVE_MINUTE.getValue());
-        createMultipleSignals(fiveMinuteSignals, ChronologicalSignals.YELLOW, factors);
+        int factors = (minInt / DefaultChronolgicalSignals.FIVE_MINUTE.getValue());
+        overrideSignals(fiveMinuteBuilder, ChronologicalSignals.YELLOW, factors);
 
-        final List<ChronologicalSignals> oneMinuteSignals = DefaultChronolgicalSignals.ONE_MINUTE.createDefaultSignal();
-        if((remainder = (minInt % DefaultChronolgicalSignals.FIVE_MINUTE.getValue())) != 0) {
+        discoverAndSetQuarterSignals(fiveMinuteBuilder);
+
+        int remainder = (minInt % DefaultChronolgicalSignals.FIVE_MINUTE.getValue());
+        if(remainder != 0) {
+            StringBuilder oneMinuteSignals = new StringBuilder();
+            setDefaultSignals(oneMinuteSignals, ChronologicalSignals.OFF, DefaultChronolgicalSignals.ONE_MINUTE.getSize());
             factors = (remainder / DefaultChronolgicalSignals.ONE_MINUTE.getValue());
-            createMultipleSignals(oneMinuteSignals, ChronologicalSignals.YELLOW, factors);
+            overrideSignals(oneMinuteSignals, ChronologicalSignals.YELLOW, factors);
+
+            fiveMinuteBuilder.append(oneMinuteSignals);
         }
 
-        totalMinuteSignals.add(fiveMinuteSignals);
-        if (!oneMinuteSignals.isEmpty()) {
-            totalMinuteSignals.add(oneMinuteSignals);
-        }
-
-        return IChronologicalFormat.VOID_FORMAT;
+        return new ChronologicalFormatComponent(fiveMinuteBuilder.toString());
     }
 
     @Override
@@ -73,9 +71,21 @@ public class BerlinUhrFormatterImpl implements IChronologicalFormatter {
                 new ChronologicalFormatComponent(ChronologicalSignals.OFF.getSignal());
     }
 
-    private void createMultipleSignals(List<ChronologicalSignals> signals, ChronologicalSignals signal, int repetition) {
+    private void discoverAndSetQuarterSignals(StringBuilder signals) {
+        if('Y' == signals.charAt(2)) signals.replace(2, 3, ChronologicalSignals.RED.getSignal());
+        if('Y' == signals.charAt(5)) signals.replace(5, 6, ChronologicalSignals.RED.getSignal());
+        if('Y' == signals.charAt(8)) signals.replace(8, 9, ChronologicalSignals.RED.getSignal());
+    }
+
+    private void overrideSignals(StringBuilder signals, ChronologicalSignals signal, int repetition) {
         for(int sig = 0; sig < repetition; sig++) {
-            signals.set(sig, signal);
+            signals.replace(sig, sig + 1, signal.getSignal());
+        }
+    }
+
+    private void setDefaultSignals(StringBuilder signals, ChronologicalSignals signal, int repetition) {
+        for(int sig = 0; sig < repetition; sig++) {
+            signals.append(signal.getSignal());
         }
     }
 

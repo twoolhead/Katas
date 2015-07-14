@@ -16,7 +16,7 @@ public class BerlinClockMotherObjects {
             Arrays.asList(ChronologicalSignals.YELLOW, ChronologicalSignals.OFF, ChronologicalSignals.OFF, ChronologicalSignals.OFF,
                     ChronologicalSignals.OFF, ChronologicalSignals.OFF, ChronologicalSignals.OFF, ChronologicalSignals.OFF, ChronologicalSignals.OFF, ChronologicalSignals.OFF, ChronologicalSignals.OFF);
 
-    public static final String FIVE = new String("YOOOOOOOOOO");
+    public static final String FIVE = "YOOOOOOOOOO";
 
     /*
         Twenty minute representation of time on a BerlinClock dial.
@@ -25,7 +25,7 @@ public class BerlinClockMotherObjects {
             Arrays.asList(ChronologicalSignals.YELLOW, ChronologicalSignals.YELLOW, ChronologicalSignals.YELLOW, ChronologicalSignals.YELLOW,
                     ChronologicalSignals.OFF, ChronologicalSignals.OFF, ChronologicalSignals.OFF, ChronologicalSignals.OFF, ChronologicalSignals.OFF, ChronologicalSignals.OFF, ChronologicalSignals.OFF);
 
-    public static final String TWENTY = new String("YYYYOOOOOOO");
+    public static final String TWENTY = "YYYYOOOOOOO";
 
     /*
         Twenty five representation of time on a BerlinClock dial.
@@ -34,13 +34,17 @@ public class BerlinClockMotherObjects {
             Arrays.asList(ChronologicalSignals.YELLOW, ChronologicalSignals.YELLOW, ChronologicalSignals.YELLOW, ChronologicalSignals.YELLOW,
                     ChronologicalSignals.YELLOW, ChronologicalSignals.OFF, ChronologicalSignals.OFF, ChronologicalSignals.OFF, ChronologicalSignals.OFF, ChronologicalSignals.OFF, ChronologicalSignals.OFF);
 
-    public static final String TWENTY_FIVE = new String("YYYYYOOOOOO");
+    public static final String TWENTY_FIVE = "YYYYYOOOOOO";
 
     /*
         Four representation of time on a BerlinClock dial.
     */
     public static final List<ChronologicalSignals> FOUR_MINUTES = Arrays.asList(ChronologicalSignals.YELLOW, ChronologicalSignals.YELLOW, ChronologicalSignals.YELLOW, ChronologicalSignals.YELLOW);
 
-    public static final String FOUR = new String("RRRR");
+    public static final String FOUR = "RRRR";
+
+    public static final String TWENTY_FOUR = "YYRYOOOOOOOYYYY";
+
+    public static final String FIFTY_SIX = "YYRYYRYYRYYYOOO";
 }
 

@@ -26,29 +26,29 @@ public class BerlinUhrFormatterImplSecondsTest {
     public void shouldIndicateRedSignalWhenSecondsAreEven() {
         final String second = new String("22");
 
-        final ChronologicalFormatComposite actualFormatted = chronologicalFormatter.formatSecond(second);
+        final IChronologicalFormat actualFormatted = chronologicalFormatter.formatSecond(second);
 
-        assertEquals(actualFormatted, new ChronologicalFormatComposite(ChronologicalSignals.RED.getSignal()), "Signal should be RED -> R");
+        assertEquals(actualFormatted.getFormatted(), ChronologicalSignals.RED.getSignal(), "Signal should be RED -> R");
     }
 
     public void shouldIndicateOffSignalWhenSecondsAreOdd() {
         final String second = new String("15");
 
-        final ChronologicalFormatComposite actualFormatted = chronologicalFormatter.formatSecond(second);
+        final IChronologicalFormat actualFormatted = chronologicalFormatter.formatSecond(second);
 
-        assertEquals(actualFormatted, new ChronologicalFormatComposite(ChronologicalSignals.OFF.getSignal()), "Signal should be OFF -> O");
+        assertEquals(actualFormatted.getFormatted(), ChronologicalSignals.OFF.getSignal(), "Signal should be OFF -> O");
     }
 
     public void shouldIndicateEmptySignalWhenSecondsAreEmpty() {
         final String second = new String("");
 
-        final ChronologicalFormatComposite actualFormatted = chronologicalFormatter.formatSecond(second);
+        final IChronologicalFormat actualFormatted = chronologicalFormatter.formatSecond(second);
 
         assertEquals(actualFormatted, IChronologicalFormat.VOID_FORMAT, "Should have returned void format.");
     }
 
     public void shouldIndicateEmptySignalWhenSecondsAreNull() {
-        final ChronologicalFormatComposite actualFormatted = chronologicalFormatter.formatSecond(null);
+        final IChronologicalFormat actualFormatted = chronologicalFormatter.formatSecond(null);
 
         assertEquals(actualFormatted, IChronologicalFormat.VOID_FORMAT, "Should have returned void format.");
     }
