@@ -6,7 +6,7 @@ package kata.berlin.clock;
 public class BerlinUhrFormatterImplHoursTest {
 
     /*
-        Hello CI.
+        Hello CI, second time lucky.
      */
 
 }
