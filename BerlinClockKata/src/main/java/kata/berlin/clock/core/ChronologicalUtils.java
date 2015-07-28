@@ -1,9 +1,6 @@
 package kata.berlin.clock.core;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Created by Thomas on 7/6/2015.
@@ -24,7 +21,10 @@ public class ChronologicalUtils {
         Time component is not null or not empty.
      */
     public static boolean timeIsNullOrEmpty(final String component) {
-        return (Objects.isNull(component) || component.trim().length() == 0);
+        return Optional.ofNullable(component)
+                .map(String::trim)
+                .filter((s) -> s.length() > 0)
+                .isPresent();
     }
 
     /*

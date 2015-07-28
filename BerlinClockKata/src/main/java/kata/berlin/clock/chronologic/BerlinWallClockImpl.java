@@ -3,8 +3,7 @@ package kata.berlin.clock.chronologic;
 import kata.berlin.clock.core.ITime;
 import kata.berlin.clock.core.TimeImpl;
 import kata.berlin.clock.core.ChronologicalUtils;
-import kata.berlin.clock.formatter.ChronologicalFormatComposite;
-import kata.berlin.clock.formatter.IChronologicalFormat;
+import kata.berlin.clock.formatter.IComposite;
 import kata.berlin.clock.formatter.IChronologicalFormatter;
 
 /**
@@ -32,7 +31,7 @@ public class BerlinWallClockImpl implements IChronologicalInstrument {
 
         ChronologicalUtils.timeIsCorrectStructure(decomposed);
 
-        final IChronologicalFormat totalSignals =
+        final IComposite totalSignals =
                 chronologicalFormatter.formatTotalTime(decomposed[HOURS], decomposed[MINUTES], decomposed[SECONDS]);
 
         return new TimeImpl(totalSignals.toString());

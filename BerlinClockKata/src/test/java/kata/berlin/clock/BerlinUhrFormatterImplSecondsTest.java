@@ -6,8 +6,7 @@ package kata.berlin.clock;
 
 import kata.berlin.clock.core.ChronologicalSignals;
 import kata.berlin.clock.formatter.BerlinUhrFormatterImpl;
-import kata.berlin.clock.formatter.ChronologicalFormatComposite;
-import kata.berlin.clock.formatter.IChronologicalFormat;
+import kata.berlin.clock.formatter.IComposite;
 import kata.berlin.clock.formatter.IChronologicalFormatter;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -26,30 +25,30 @@ public class BerlinUhrFormatterImplSecondsTest {
     public void shouldIndicateRedSignalWhenSecondsAreEven() {
         final String second = new String("22");
 
-        final IChronologicalFormat actualFormatted = chronologicalFormatter.formatSecond(second);
+        final IComposite actualFormatted = chronologicalFormatter.formatSecond(second);
 
-        assertEquals(actualFormatted.getFormatted(), ChronologicalSignals.RED.getSignal(), "Signal should be RED -> R");
+        assertEquals(actualFormatted.compose(), ChronologicalSignals.RED.getSignal(), "Signal should be RED -> R");
     }
 
     public void shouldIndicateOffSignalWhenSecondsAreOdd() {
         final String second = new String("15");
 
-        final IChronologicalFormat actualFormatted = chronologicalFormatter.formatSecond(second);
+        final IComposite actualFormatted = chronologicalFormatter.formatSecond(second);
 
-        assertEquals(actualFormatted.getFormatted(), ChronologicalSignals.OFF.getSignal(), "Signal should be OFF -> O");
+        assertEquals(actualFormatted.compose(), ChronologicalSignals.OFF.getSignal(), "Signal should be OFF -> O");
     }
 
     public void shouldIndicateEmptySignalWhenSecondsAreEmpty() {
         final String second = new String("");
 
-        final IChronologicalFormat actualFormatted = chronologicalFormatter.formatSecond(second);
+        final IComposite actualFormatted = chronologicalFormatter.formatSecond(second);
 
-        assertEquals(actualFormatted, IChronologicalFormat.VOID_FORMAT, "Should have returned void format.");
+        assertEquals(actualFormatted, IComposite.VOID_FORMAT, "Should have returned void format.");
     }
 
     public void shouldIndicateEmptySignalWhenSecondsAreNull() {
-        final IChronologicalFormat actualFormatted = chronologicalFormatter.formatSecond(null);
+        final IComposite actualFormatted = chronologicalFormatter.formatSecond(null);
 
-        assertEquals(actualFormatted, IChronologicalFormat.VOID_FORMAT, "Should have returned void format.");
+        assertEquals(actualFormatted, IComposite.VOID_FORMAT, "Should have returned void format.");
     }
 }

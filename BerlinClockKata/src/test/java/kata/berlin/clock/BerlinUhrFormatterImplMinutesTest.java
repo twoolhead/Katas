@@ -1,8 +1,7 @@
 package kata.berlin.clock;
 
 import kata.berlin.clock.formatter.BerlinUhrFormatterImpl;
-import kata.berlin.clock.formatter.ChronologicalFormatComposite;
-import kata.berlin.clock.formatter.IChronologicalFormat;
+import kata.berlin.clock.formatter.IComposite;
 import kata.berlin.clock.formatter.IChronologicalFormatter;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -25,54 +24,54 @@ public class BerlinUhrFormatterImplMinutesTest {
     public void shouldIndicateCorrectSignalsForTwentyMinuteInterval() {
         final String minute = new String("20");
 
-        final IChronologicalFormat actualFormatted = chronologicalFormatter.formatMinute(minute);
+        final IComposite actualFormatted = chronologicalFormatter.formatMinute(minute);
 
-        assertEquals(actualFormatted.getFormatted(), BerlinClockMotherObjects.TWENTY);
+        assertEquals(actualFormatted.compose(), BerlinClockMotherObjects.TWENTY);
     }
 
     public void shouldIndicateCorrectSignalsForTwentyFiveInterval() {
         final String minute = new String("25");
 
-        final IChronologicalFormat actualFormatted = chronologicalFormatter.formatMinute(minute);
+        final IComposite actualFormatted = chronologicalFormatter.formatMinute(minute);
 
-        assertEquals(actualFormatted.getFormatted(), BerlinClockMotherObjects.TWENTY_FIVE);
+        assertEquals(actualFormatted.compose(), BerlinClockMotherObjects.TWENTY_FIVE);
     }
 
     public void shouldIndicateCorrectSignalsForTwentyFourInterval() {
         final String minute = new String("24");
 
-        final IChronologicalFormat actualFormatted = chronologicalFormatter.formatMinute(minute);
+        final IComposite actualFormatted = chronologicalFormatter.formatMinute(minute);
 
-        assertEquals(actualFormatted.getFormatted(), BerlinClockMotherObjects.TWENTY_FOUR);
+        assertEquals(actualFormatted.compose(), BerlinClockMotherObjects.TWENTY_FOUR);
     }
 
     public void shouldIndicateCorrectSignalsForFiveMinuteInterval() {
         final String minute = new String("5");
 
-        final IChronologicalFormat actualFormatted = chronologicalFormatter.formatMinute(minute);
+        final IComposite actualFormatted = chronologicalFormatter.formatMinute(minute);
 
-        assertEquals(actualFormatted.getFormatted(), BerlinClockMotherObjects.FIVE);
+        assertEquals(actualFormatted.compose(), BerlinClockMotherObjects.FIVE);
     }
 
     public void shouldIndicateCorrectSignalsForFiftySixMinuteInterval() {
         final String minute = new String("56");
 
-        final IChronologicalFormat actualFormatted = chronologicalFormatter.formatMinute(minute);
+        final IComposite actualFormatted = chronologicalFormatter.formatMinute(minute);
 
-        assertEquals(actualFormatted.getFormatted(), BerlinClockMotherObjects.FIFTY_SIX);
+        assertEquals(actualFormatted.compose(), BerlinClockMotherObjects.FIFTY_SIX);
     }
 
     public void shouldIndicateEmptySignalWhenSecondsAreEmpty() {
         final String second = new String("");
 
-        final IChronologicalFormat actualFormatted = chronologicalFormatter.formatMinute(second);
+        final IComposite actualFormatted = chronologicalFormatter.formatMinute(second);
 
-        assertEquals(actualFormatted, IChronologicalFormat.VOID_FORMAT, "Should have returned void format.");
+        assertEquals(actualFormatted, IComposite.VOID_FORMAT, "Should have returned void format.");
     }
 
     public void shouldIndicateEmptySignalWhenSecondsAreNull() {
-        final IChronologicalFormat actualFormatted = chronologicalFormatter.formatMinute(null);
+        final IComposite actualFormatted = chronologicalFormatter.formatMinute(null);
 
-        assertEquals(actualFormatted, IChronologicalFormat.VOID_FORMAT, "Should have returned void format.");
+        assertEquals(actualFormatted, IComposite.VOID_FORMAT, "Should have returned void format.");
     }
 }
